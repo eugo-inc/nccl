@@ -10,14 +10,15 @@
 #include <stdint.h>
 #include <string.h>
 
-#if !__NVCC__
-  #ifndef __host__
-    #define __host__
-  #endif
-  #ifndef __device__
-    #define __device__
-  #endif
-#endif
+// @EUGO: removing is it breaks clang which also defines `__host__` and `__device__` tokens.
+// #if !__NVCC__
+//   #ifndef __host__
+//     #define __host__
+//   #endif
+//   #ifndef __device__
+//     #define __device__
+//   #endif
+// #endif
 
 #define DIVUP(x, y) \
     (((x)+(y)-1)/(y))
