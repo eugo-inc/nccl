@@ -5,9 +5,12 @@
  ************************************************************************/
 
 // Workaround for libstdc++ trying to force public visibility of std:: symbols.  We don't want to do that in libnccl.so.
-#include <bits/c++config.h>
-#undef _GLIBCXX_VISIBILITY
-#define _GLIBCXX_VISIBILITY(V)
+// @EUGO because this symbol is not present in llvm's libc++, these statements don't have real affect. This means
+// that in our case, `libnccl` will export libc++ symbols. However, highly likely it won't cause trouble for us
+// because we build everything using single c++ stdlib implementation.
+// #include <bits/c++config.h>
+// #undef _GLIBCXX_VISIBILITY
+// #define _GLIBCXX_VISIBILITY(V)
 #include <cstddef>
 #include <mutex>
 #include <poll.h>
